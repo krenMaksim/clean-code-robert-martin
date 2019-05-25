@@ -1,11 +1,11 @@
 package com.kren.clean.code.book.listing10_5;
 
 public class PrintPrimes {
-    private static final int PAGE_SIZE = 1000;
-    private static final int RR = 50;
-    private static final int CC = 4;
+    private static final int PRIMES_AMOUNT = 1000;
+    private static final int ROWS_MAX_NUMBER = 50;
+    private static final int COLUMNS_MAX_NUMBER = 4;
     private static final int ORDMAX = 30;
-    private static final int P[] = new int[PAGE_SIZE + 1];
+    private static final int PRIMES[] = new int[PRIMES_AMOUNT + 1];
 
     public static void main(String[] args) {
 
@@ -17,21 +17,21 @@ public class PrintPrimes {
         int N;
         int MULT[] = new int[ORDMAX + 1];
 
-        P[1] = 2;
+        PRIMES[1] = 2;
 
-        while (K < PAGE_SIZE) {
+        while (K < PRIMES_AMOUNT) {
             do {
                 J = J + 2;
                 if (J == SQUARE) {
                     ORD = ORD + 1;
-                    SQUARE = P[ORD] * P[ORD];
+                    SQUARE = PRIMES[ORD] * PRIMES[ORD];
                     MULT[ORD - 1] = J;
                 }
                 N = 2;
                 JPRIME = true;
                 while (N < ORD && JPRIME) {
                     while (MULT[N] < J) {
-                        MULT[N] = MULT[N] + P[N] + P[N];
+                        MULT[N] = MULT[N] + PRIMES[N] + PRIMES[N];
                     }
                     if (MULT[N] == J) {
                         JPRIME = false;
@@ -41,27 +41,44 @@ public class PrintPrimes {
             } while (!JPRIME);
 
             K = K + 1;
-            P[K] = J;
+            PRIMES[K] = J;
         }
-        printResultTable();
+        printTableOfPrimes();
     }
 
-    private static void printResultTable() {
+    private static void printTableOfPrimes() {
         int pageNumber = 1;
         int pageOffset = 1;
-        while (pageOffset <= PAGE_SIZE) {
-            System.out.println("The First " + PAGE_SIZE + " Prime Numbers --- Page " + pageNumber);
-            System.out.println("");
-            for (int rowOffset = pageOffset; rowOffset < pageOffset + RR; rowOffset++) {
-                for (int C = 0; C < CC; C++)
-                    if (rowOffset + C * RR <= PAGE_SIZE) {
-                        System.out.format("%10d", P[rowOffset + C * RR]);
+        while (pageOffset <= PRIMES_AMOUNT) {
+            printPageHeader(pageNumber);
+            for (int rowOffset = pageOffset; rowOffset < pageOffset + ROWS_MAX_NUMBER; rowOffset++) {
+                for (int column = 0; column < COLUMNS_MAX_NUMBER; column++)
+                    if (rowOffset + column * ROWS_MAX_NUMBER <= PRIMES_AMOUNT) {
+                        int primeIndex = rowOffset + column * ROWS_MAX_NUMBER;
+                        printPrime(primeIndex);
                     }
-                System.out.println("");
+                printBlankLine();
             }
-            System.out.println("\f");
-            pageNumber = pageNumber + 1;
-            pageOffset = pageOffset + RR * CC;
+            printPageFooter();
+            pageNumber++;
+            pageOffset = pageOffset + ROWS_MAX_NUMBER * COLUMNS_MAX_NUMBER;
         }
+    }
+
+    private static void printPrime(int primeIndex) {
+        System.out.format("%10d", PRIMES[primeIndex]);
+    }
+
+    private static void printPageHeader(int pageNumber) {
+        System.out.println("The First " + PRIMES_AMOUNT + " Prime Numbers --- Page " + pageNumber);
+        printBlankLine();
+    }
+
+    private static void printBlankLine() {
+        System.out.println("");
+    }
+
+    private static void printPageFooter() {
+        System.out.println("\f");
     }
 }
