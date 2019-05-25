@@ -31,6 +31,6 @@ public class PrintPrimesE2e {
     public void compareAppOutputWithActual() {
         String actualOutPut = getActualOutPut();
         PrintPrimes.main(NO_ARGS);
-        assertEquals(actualOutPut, printPrimesOutput.toString());
+        assertEquals(printPrimesOutput.toString(), actualOutPut);
     }
 }
