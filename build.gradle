@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+ext {
+    javaVersion = 1.8
+    groupValue = 'com.kren'
+    versionValue = '1.0-SNAPSHOT'
+}
+
+group = groupValue
+version = versionValue
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+jar {
+    //to avoid SNAPSHOT
+    version = null
+}
+
+repositories {        
+     mavenCentral()
+}
+
+dependencies {    
+    compile 'com.google.guava:guava:23.0'    
+
+    testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
+}
+
+test {
+   useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
