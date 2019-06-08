@@ -1,4 +1,4 @@
-package com.kren.clean.code.book.listing10_5;
+package com.kren.clean.code.book.listing10_5.before;
 
 public class PrintPrimesOriginal {
 
