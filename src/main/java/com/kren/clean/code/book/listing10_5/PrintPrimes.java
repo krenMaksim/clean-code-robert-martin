@@ -6,8 +6,7 @@ public class PrintPrimes {
     private static final int COLUMNS_MAX_NUMBER = 4;
 
     public static void main(String[] args) {
-        int primes[] = PrimeUtil.findPrimes(PRIMES_AMOUNT);
-        PrimeTable primeTable = new PrimeTable(primes, COLUMNS_MAX_NUMBER, ROWS_MAX_NUMBER);
-        primeTable.printTable();
+        int primes[] = PrimeCalculator.findPrimes(PRIMES_AMOUNT);
+        NumbersTable.printTable(primes, COLUMNS_MAX_NUMBER, ROWS_MAX_NUMBER);
     }
 }

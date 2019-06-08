@@ -1,22 +1,26 @@
 package com.kren.clean.code.book.listing10_5;
 
-class PrimeTable {
-    private final int[] primes;
-    private final int columnsNumber;
-    private final int rowsNumber;
-    private final int primesAmount;
-
-    public PrimeTable(int[] primes, int columnsNumber, int rowsNumber) {
-        this.primes = primes;
-        this.columnsNumber = columnsNumber;
-        this.rowsNumber = rowsNumber;
-        primesAmount = primes.length - 1;
+class NumbersTable {
+    public static void printTable(int[] numbers, int columnsNumber, int rowsNumber) {
+        new NumbersTable(numbers, columnsNumber, rowsNumber).printTable();
     }
 
-    public void printTable() {
+    private final int[] numbers;
+    private final int columnsNumber;
+    private final int rowsNumber;
+    private final int numberAmount;
+
+    private NumbersTable(int[] numbers, int columnsNumber, int rowsNumber) {
+        this.numbers = numbers;
+        this.columnsNumber = columnsNumber;
+        this.rowsNumber = rowsNumber;
+        numberAmount = numbers.length - 1;
+    }
+
+    private void printTable() {
         int pageNumber = 1;
         int pageOffset = 1;
-        while (pageOffset <= primesAmount) {
+        while (pageOffset <= numberAmount) {
             printPageHeader(pageNumber);
             printPageBody(pageOffset);
             printPageFooter();
@@ -34,15 +38,15 @@ class PrimeTable {
 
     private void printRow(int rowOffset) {
         for (int column = 0; column < columnsNumber; column++) {
-            int primeIndex = rowOffset + column * rowsNumber;
-            if (primeIndex <= primesAmount) {
-                System.out.format("%10d", primes[primeIndex]);
+            int numberIndex = rowOffset + column * rowsNumber;
+            if (numberIndex <= numberAmount) {
+                System.out.format("%10d", numbers[numberIndex]);
             }
         }
     }
 
     private void printPageHeader(int pageNumber) {
-        System.out.println("The First " + primesAmount + " Prime Numbers --- Page " + pageNumber);
+        System.out.println("The First " + numberAmount + " Prime Numbers --- Page " + pageNumber);
         printBlankLine();
     }
 
