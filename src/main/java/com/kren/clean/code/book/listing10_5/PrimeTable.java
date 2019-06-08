@@ -1,6 +1,6 @@
 package com.kren.clean.code.book.listing10_5;
 
-public class PrimeTable {
+class PrimeTable {
     private final int[] primes;
     private final int columnsNumber;
     private final int rowsNumber;
@@ -13,7 +13,7 @@ public class PrimeTable {
         primesAmount = primes.length - 1;
     }
 
-    public void printTableOfPrimes() {
+    public void printTable() {
         int pageNumber = 1;
         int pageOffset = 1;
         while (pageOffset <= primesAmount) {
